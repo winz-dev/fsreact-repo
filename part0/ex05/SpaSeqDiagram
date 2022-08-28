@@ -1,0 +1,18 @@
+title Notes -- single page app
+
+Browser -> Server: GET /exampleapp/spa
+Server -->Browser: HTML-code
+Browser->Server: HTTP GET /exampleapp/main.css
+Server-->Browser: main.css
+Browser->Server: HTTP GET /exampleapp/spa.js
+Server-->Browser: spa.js
+note over Browser 
+    JS code interpreting on browser-side
+    trigger a fetch for data.json
+end note 
+Browser -> Server: HTTP GET /exampleapp/data.json
+Server -->Browser: JSON Data send: [{ content: "HTML is easy", date: "2019-05-23" }, ...]
+note over Browser:
+    Browser executes the event handler
+    that renders notes to display
+end note
