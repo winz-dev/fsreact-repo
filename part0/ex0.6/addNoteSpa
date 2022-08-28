@@ -1,0 +1,11 @@
+title Add new note (SPA)
+Browser->Server: HTTP POST /exampleapp/new_note_spa
+note over Server:
+    payload: {content: "Zeus is back", date: "2022-08-28T17:54:37.754Z"}
+end note
+Server -->Browser: Json - ack message
+note over Server
+    {"message":"note created"}
+    Call to spa.js function to update DOM element `UL`
+    without reloading the entire page
+end note 
