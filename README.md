@@ -2,7 +2,7 @@
 Project Full Stack web dev
 Exercice submission repo
 Part 0:
-Exercices:
+Exercices submited:
 exo04
 exo05
-exo046
+exo06
