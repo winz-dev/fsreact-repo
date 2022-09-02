@@ -1,16 +1,16 @@
 import { useState } from 'react'
 const App = () => {
-  console.log(useState(0));
-  const [counter, getCounter] = useState(0);
+  const [counter, setCounter] = useState(0);
 
-  setTimeout(
-    () => getCounter(counter + 2),
-    1000)
     console.log("rendering...", counter)
+    const handleClick = () => setCounter(counter + 2)
   return (
-    <>
-      {counter}
-    </>
+    <div>
+      <strong>{counter}</strong>
+      <button onClick={() => setCounter(counter)}>Click zero!</button>
+      <button onClick={() => setCounter(counter + 1)}>Click one!</button>
+      <button onClick={handleClick}>Click two!</button>
+    </div>
   )
 }
 export default App;  
