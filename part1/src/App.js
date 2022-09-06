@@ -1,21 +1,17 @@
-import { useState } from 'react'
+import { useState } from "react"
 
-const Display = ({counter}) => (<>{counter}</>)
-const Button = ({text, onClick}) => (<button onClick={onClick}>{text}</button>)
 const App = () => {
-  const [counter, setCounter] = useState(0);
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
 
-  const setToZero = () => setCounter(0) 
-  const addOne = () => setCounter(counter + 1)
-  const decreaseByOne = () => setCounter(counter - 1)
+  const clickLeft = () => setLeft(left + 1)
+  const clickRight = () => setRight(right + 1)
 
   return (
     <>
-      <Display counter={counter} /> <br />
-      <Button text="Reset" onClick={setToZero} />
-      <Button text="Plus" onClick={addOne} />
-      <Button text="Minus" onClick={decreaseByOne} />
-    </>
-  )
+      <button onClick={clickLeft}>  Left => <strong>{left}</strong></button>
+      <button onClick={clickRight}> Right =><strong>{right}</strong></button>
+    </>)
 }
-export default App;  
+
+export default App; 
