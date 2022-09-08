@@ -1,22 +1,50 @@
 import { useState } from "react"
 
-const App = () => {
- 
-  const [clicks, setClicks] = useState({
-    left: 0,
-    right: 0,
-    allClicks: []
-  })
+const History = (props) => {
+  if(props.allClicks.length === 0) {
+    return (
+    <>
+      Click on Left or Right !
+    </>)
+  }
 
-  const handleRightClick = () => setClicks({...clicks, right: clicks.right + 1, allClicks: clicks.allClicks.concat('R')})
-  
-  const handleLeftClick = () => setClicks({...clicks, left: clicks.left + 1, allClicks: clicks.allClicks.concat('L')})
-  
   return (
     <>
-      <button onClick={handleLeftClick}>  Left => <strong>{clicks.left}</strong></button>
-      <button onClick={handleRightClick}> Right => <strong>{clicks.right}</strong></button>
-      <p>{clicks.allClicks.join('-')}</p>
+      button press history: {props.allClicks.join(' ')}
+    </>
+  )
+}
+
+const Button = ({text, clickEventHandler, nbTimes}) => {
+  return (
+    <>
+      <button onClick={clickEventHandler}>{text}</button>
+      <p>You clicked: <strong>{nbTimes} </strong>times on {text}</p>
+    </>
+  )
+}
+
+const App = () => {
+ 
+  const [left, setLeft] = useState(0);
+  const [right, setRight] = useState(0);
+  const [allClicks, setAll] = useState([]);
+
+  const handleLeftClick = () => {
+    setLeft(left + 1)
+    setAll(allClicks.concat('L'))
+  }
+  const handleRightClick = () => {
+    setRight(right + 1)
+    setAll(allClicks.concat('R'))
+  }
+ 
+  return (
+    <>
+      <Button text="Left" nbTimes={left} clickEventHandler={handleLeftClick}/>
+      <Button text="Right" nbTimes={right} clickEventHandler={handleRightClick}/>
+      <br />
+      <History allClicks={allClicks}/>
     </>)
 }
 
