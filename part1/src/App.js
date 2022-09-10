@@ -4,9 +4,7 @@ const App = () => {
   const greetings = "Morning Dear Mrs. / Mr."
   const [value, setValue] = useState(-1);
 
-  const setNewValue = (newValue) => () => setValue(newValue)
-  const resetValue = () => () => setValue(0)
-  const incrementValue = () => () => setValue(value + 1)
+  const setToValue = (nVal) => setValue(nVal)
 
   return (<>
     <h1>
@@ -16,9 +14,9 @@ const App = () => {
     <p>
       Function that returns a function <br />
       <strong> {value} </strong>  <br />
-      <button onClick={setNewValue(100)}>Value Nth </button>
-      <button onClick={resetValue()}>Reset</button>
-      <button onClick={incrementValue()}>Increment</button>
+      <button onClick={() => setToValue(100)}>Value Nth </button>
+      <button onClick={() => setToValue(0)}>Reset</button>
+      <button onClick={() => setToValue(value + 1)}>Increment</button>
     </p>
   </>);
 }
