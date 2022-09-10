@@ -1,23 +1,16 @@
 import { useState } from 'react'
 
 const App = () => {
-  const greetings = "Morning Dear Mrs. / Mr."
-  const [value, setValue] = useState(-1);
+  // save clicks of each button to its own state
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
 
-  const setToValue = (nVal) => setValue(nVal)
-
-  return (<>
-    <h1>
-      {greetings}
-    </h1>
-    <hr />
-    <p>
-      Function that returns a function <br />
-      <strong> {value} </strong>  <br />
-      <button onClick={() => setToValue(100)}>Value Nth </button>
-      <button onClick={() => setToValue(0)}>Reset</button>
-      <button onClick={() => setToValue(value + 1)}>Increment</button>
-    </p>
-  </>);
+  return (
+    <div>
+      Start here
+    </div>
+  )
 }
+
 export default App
