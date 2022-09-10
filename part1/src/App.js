@@ -1,51 +1,25 @@
-import { useState } from "react"
-
-const History = (props) => {
-  if(props.allClicks.length === 0) {
-    return (
-    <>
-      Click on Left or Right !
-    </>)
-  }
-
-  return (
-    <>
-      button press history: {props.allClicks.join(' ')}
-    </>
-  )
-}
-
-const Button = ({text, clickEventHandler, nbTimes}) => {
-  return (
-    <>
-      <button onClick={clickEventHandler}>{text}</button>
-      <p>You clicked: <strong>{nbTimes} </strong>times on {text}</p>
-    </>
-  )
-}
+import { useState } from 'react'
 
 const App = () => {
- 
-  const [left, setLeft] = useState(0);
-  const [right, setRight] = useState(0);
-  const [allClicks, setAll] = useState([]);
+  const greetings = "Morning Dear Mrs. / Mr."
+  const [value, setValue] = useState(-1);
 
-  const handleLeftClick = () => {
-    setLeft(left + 1)
-    setAll(allClicks.concat('L'))
-  }
-  const handleRightClick = () => {
-    setRight(right + 1)
-    setAll(allClicks.concat('R'))
-  }
- 
-  return (
-    <>
-      <Button text="Left" nbTimes={left} clickEventHandler={handleLeftClick}/>
-      <Button text="Right" nbTimes={right} clickEventHandler={handleRightClick}/>
-      <br />
-      <History allClicks={allClicks}/>
-    </>)
+  const setNewValue = (newValue) => () => setValue(newValue)
+  const resetValue = () => () => setValue(0)
+  const incrementValue = () => () => setValue(value + 1)
+
+  return (<>
+    <h1>
+      {greetings}
+    </h1>
+    <hr />
+    <p>
+      Function that returns a function <br />
+      <strong> {value} </strong>  <br />
+      <button onClick={setNewValue(100)}>Value Nth </button>
+      <button onClick={resetValue()}>Reset</button>
+      <button onClick={incrementValue()}>Increment</button>
+    </p>
+  </>);
 }
-
-export default App; 
+export default App
