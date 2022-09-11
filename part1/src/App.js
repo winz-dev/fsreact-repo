@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
-const StatisticLine = ({name, value}) => {
+const StatisticLine = ({ name, value }) => {
   return (
-    <>
-      <li>{name}: {value}</li>
-    </>
+    <tr>
+      <td>{name}</td> <td>{value}</td>
+    </tr>
   )
 }
 
@@ -12,20 +12,20 @@ const Statistic = ({ good, neutral, bad }) => {
   let positive = 0;
   let allFeeds = good + neutral + bad
   if (allFeeds) {
-    positive = good / allFeeds
+    positive = good * 100 / allFeeds
   }
   if (allFeeds)
     return (
       <>
         <h2>Statistics</h2>
-        <ul>
+        <table>
           <StatisticLine name="Good" value={good} />
           <StatisticLine name="Neutral" value={neutral} />
           <StatisticLine name="Bad" value={bad} />
           <StatisticLine name="All" value={allFeeds} />
-          <StatisticLine name="Positive" value={positive} />
-          <StatisticLine name="Average" value={(allFeeds / 3)} />
-        </ul>
+          <StatisticLine name="Positive" value={positive.toFixed(2) + " %"} />
+          <StatisticLine name="Average" value={(allFeeds / 3).toFixed(2)} />
+        </table>
       </>
     )
   return (
@@ -35,7 +35,7 @@ const Statistic = ({ good, neutral, bad }) => {
     </>)
 }
 
-const Button = ({handClickEvent, text}) => {
+const Button = ({ handClickEvent, text }) => {
 
   return (
     <>
