@@ -1,12 +1,7 @@
 import { useState } from 'react'
 
-const StatisticLine = ({ name, value }) => {
-  return (
-    <tr>
-      <td>{name}</td> <td>{value}</td>
-    </tr>
-  )
-}
+const StatisticLine = ({ name, value }) => (<tr><td>{name}</td><td>{value}</td></tr>)
+
 
 const Statistic = ({ good, neutral, bad }) => {
   let positive = 0;
@@ -19,12 +14,14 @@ const Statistic = ({ good, neutral, bad }) => {
       <>
         <h2>Statistics</h2>
         <table>
-          <StatisticLine name="Good" value={good} />
-          <StatisticLine name="Neutral" value={neutral} />
-          <StatisticLine name="Bad" value={bad} />
-          <StatisticLine name="All" value={allFeeds} />
-          <StatisticLine name="Positive" value={positive.toFixed(2) + " %"} />
-          <StatisticLine name="Average" value={(allFeeds / 3).toFixed(2)} />
+          <tbody>
+            <StatisticLine name="Good" value={good} />
+            <StatisticLine name="Neutral" value={neutral} />
+            <StatisticLine name="Bad" value={bad} />
+            <StatisticLine name="All" value={allFeeds} />
+            <StatisticLine name="Positive" value={positive.toFixed(2) + " %"} />
+            <StatisticLine name="Average" value={(allFeeds / 3).toFixed(2)} />
+          </tbody>
         </table>
       </>
     )
@@ -51,7 +48,7 @@ const App = () => {
   const [bad, setBad] = useState(0)
   const incValue = (val) => ((val + 1))
   return (
-    <div>
+    <>
       <h1>Unicafe</h1>
       <hr />
       <h2>Give Feedback</h2>
@@ -59,7 +56,7 @@ const App = () => {
       <Button handClickEvent={() => incValue(setNeutral(neutral + 1))} text="Bad" />
       <Button handClickEvent={() => incValue(setBad(bad + 1))} text="Bad" />
       <Statistic good={good} neutral={neutral} bad={bad} />
-    </div>
+    </>
   )
 }
 
