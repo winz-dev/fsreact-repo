@@ -1,62 +1,25 @@
 import { useState } from 'react'
 
-const StatisticLine = ({ name, value }) => (<tr><td>{name}</td><td>{value}</td></tr>)
-
-
-const Statistic = ({ good, neutral, bad }) => {
-  let positive = 0;
-  let allFeeds = good + neutral + bad
-  if (allFeeds) {
-    positive = good * 100 / allFeeds
-  }
-  if (allFeeds)
-    return (
-      <>
-        <h2>Statistics</h2>
-        <table>
-          <tbody>
-            <StatisticLine name="Good" value={good} />
-            <StatisticLine name="Neutral" value={neutral} />
-            <StatisticLine name="Bad" value={bad} />
-            <StatisticLine name="All" value={allFeeds} />
-            <StatisticLine name="Positive" value={positive.toFixed(2) + " %"} />
-            <StatisticLine name="Average" value={(allFeeds / 3).toFixed(2)} />
-          </tbody>
-        </table>
-      </>
-    )
-  return (
-    <>
-      <h2>Statistics</h2>
-      <p>No Feedback given...</p>
-    </>)
-}
-
-const Button = ({ handClickEvent, text }) => {
-
-  return (
-    <>
-      <button onClick={handClickEvent}>{text}</button>
-    </>
-  )
-}
-
 const App = () => {
-  // save clicks of each button to its own state
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
-  const incValue = (val) => ((val + 1))
+  const anecdotes = [
+    'If it hurts, do it more often.',
+    'Adding manpower to a late software project makes it later!',
+    'The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+    'Premature optimization is the root of all evil.',
+    'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
+    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.'
+  ]
+   
+  const [selected, setSelected] = useState(0)
+  
+  const handleClick = () => (setSelected(Math.floor(Math.random() * anecdotes.length)));
+
   return (
-    <>
-      <h1>Unicafe</h1>
-      <hr />
-      <h2>Give Feedback</h2>
-      <Button handClickEvent={() => incValue(setGood(good + 1))} text="Good" />
-      <Button handClickEvent={() => incValue(setNeutral(neutral + 1))} text="Bad" />
-      <Button handClickEvent={() => incValue(setBad(bad + 1))} text="Bad" />
-      <Statistic good={good} neutral={neutral} bad={bad} />
-    </>
+    <div>
+      {anecdotes[selected]} <br />
+      <button onClick={handleClick}>next anecdote</button>
+    </div>
   )
 }
 
