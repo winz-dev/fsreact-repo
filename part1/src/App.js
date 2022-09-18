@@ -38,9 +38,7 @@ const App = () => {
     if (!votes.length) {
       var tab = new Array(anecdotes.length).fill(0);
       setVotes([...tab])
-      return
     }
-    return
   }
 
   const mostVoted = () => {
