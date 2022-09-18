@@ -1,5 +1,24 @@
 import { useState } from 'react'
 
+const PreferredAnecdotes = ({ electedVote, vote }) => {
+  if (vote) {
+    return (
+      <>
+        <h2>Anecdote with most largest votes</h2>
+        <p>{electedVote}</p>
+        <NumberTimesSelected num={vote} />
+      </>)
+  }
+  return (<><p> Please let us know your preference anecdote</p></>)
+}
+
+const NumberTimesSelected = ({ num }) => {
+  if (num > 0) {
+    return <><p>Has <strong>{num} </strong>votes</p></>
+  }
+  return (<><p>No votes for this anecdote</p></>)
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -12,34 +31,61 @@ const App = () => {
   ]
 
   const [selected, setSelected] = useState(0)
-  const [votes, setVotes] = useState({})
-  let index = selected;
+  const [votes, setVotes] = useState([])
 
-  const addVotes = () => {
-    let obj = { ...votes }
-    index = selected.toString()
+  const initVotes = () => {
 
-    if (!obj.hasOwnProperty(index)) {
-      obj[index] = 1
-      return setVotes(obj)
+    if (!votes.length) {
+      var tab = new Array(anecdotes.length).fill(0);
+      setVotes([...tab])
+      return
     }
-    obj[index]++
-    return setVotes(obj)
+    return
   }
 
-  const handleClick = () => setSelected(Math.floor(Math.random() * anecdotes.length))
+  const mostVoted = () => {
 
-  console.log(votes);
+    var maxVote = 0
+    var indexOfMax = 0
+    var i;
+    for (i = 1; i < votes.length; i++) {
+      var value = votes[i];
+      if (value > maxVote) {
+        maxVote = value
+        indexOfMax = i
+      }
+    }
+    return indexOfMax;
+  }
+
+  const addVotes = () => {
+    var votesTab = [...votes]
+    if (!votesTab[selected]) {
+      votesTab[selected] = 1
+    }
+    else {
+      votesTab[selected] += 1
+    }
+    setVotes([...votesTab])
+  }
+
+  const handleClick = () => {
+    setSelected(Math.floor(Math.random() * anecdotes.length))
+  }
+
+  initVotes();
 
   return (
     <div>
       <h1>Anecdote</h1>
-      <p>{anecdotes[selected]} <br />
-      has <strong>{votes[selected]}</strong> votes
-      </p>
-      <button onClick={addVotes}>votes</button>
+      <hr />
+      <h2>Anecdote of the day</h2>
+      <blockquote>{anecdotes[selected]}</blockquote>
+      <NumberTimesSelected num={votes[selected]} />
+      <button onClick={addVotes} >votes</button>
       <button onClick={handleClick}>next anecdote</button>
       <hr />
+      <PreferredAnecdotes electedVote={anecdotes[mostVoted()]} vote={votes[mostVoted()]} />
     </div>
   )
 }
