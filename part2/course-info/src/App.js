@@ -1,7 +1,10 @@
-const Course = (course) => {
+const Course = (props) => {
   return (
     <>
-     <h2>Course information</h2>
+      <h1>Course information</h1>
+      <hr />
+      <h2>{props.course.name}</h2>
+      {props.course.parts.map(part => <li>{part.name} {part.exercises}</li>)}
     </>
   )
 }
