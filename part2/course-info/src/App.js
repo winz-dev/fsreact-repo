@@ -1,10 +1,15 @@
 const Course = (props) => {
+  const sum = props.course.parts.reduce( (total, currentVal) => {
+    return total + currentVal.exercises
+  }, 0)
+  
   return (
     <>
       <h1>Course information</h1>
       <hr />
       <h2>{props.course.name}</h2>
-      {props.course.parts.map(part => <li>{part.name} {part.exercises}</li>)}
+      {props.course.parts.map(part => <li key={part.id}>{part.name} {part.exercises}</li>)} 
+      <strong>Total of exercises is: {sum}</strong>
     </>
   )
 }
@@ -28,10 +33,20 @@ const App = () => {
         name: 'State of a component',
         exercises: 14,
         id: 3
+      },
+      {
+        name: 'Redux',
+        exercises: 7,
+        id: 4
+      },
+      {
+        name: 'React Native',
+        exercises: 25,
+        id: 5
       }
     ]
   }
-
+  
   return <Course course={course} />
 }
 
